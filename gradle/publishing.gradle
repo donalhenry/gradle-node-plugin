@@ -1,5 +1,38 @@
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
+
+
+
+publishing {
+    repositories {
+        maven {
+            name "nexus"
+            url 'http://adnexus.zh.adnovum.ch:8081/nexus/content/repositories/adnovum/'
+
+            credentials {
+                username ''
+                password ''
+            }
+        }
+    }
+
+    task sourceJar(type: Jar) {
+        from sourceSets.main.allJava
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
+
+/*
 apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'com.gradle.plugin-publish'
 
@@ -80,3 +113,4 @@ String resolveProperty( String envVarKey, String projectPropKey )
 
     hasProperty( projectPropKey ) ? getProperty( projectPropKey ) : null
 }
+*/
