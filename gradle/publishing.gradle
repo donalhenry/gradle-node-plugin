@@ -6,27 +6,30 @@ apply plugin: 'maven-publish'
 publishing {
     repositories {
         maven {
-            name "nexus"
-            url 'http://adnexus.zh.adnovum.ch:8081/nexus/content/repositories/adnovum/'
+            // name "nexus"
+            // url 'http://adnexus.zh.adnovum.ch:8081/nexus/content/repositories/adnovum/'
+            url "https://artifactory.scm.awsbest.turner.com/artifactory/libs-snapshot-local"
 
             credentials {
-                username ''
-                password ''
+                // username ''
+                // password ''
+                username "bpsadmin"
+        				password "nit6#deg"
             }
         }
     }
 
-    task sourceJar(type: Jar) {
-        from sourceSets.main.allJava
-    }
+    // task sourceJar(type: Jar) {
+    //     from sourceSets.main.allJava
+    // }
 
     publications {
         mavenJava(MavenPublication) {
             from components.java
 
-            artifact sourceJar {
-                classifier "sources"
-            }
+            // artifact sourceJar {
+            //     classifier "sources"
+            // }
         }
     }
 }
